@@ -133,9 +133,9 @@ EOF
         # 🖥️ 桌面环境分发中心
         # =========================
         if [ "$distro_variant" = "desktop" ]; then
-            chroot rootdir useradd -m -s /bin/bash luser || true
-            chroot rootdir bash -c "echo 'luser:luser' | chpasswd"
-            chroot rootdir usermod -aG sudo,audio,video,input luser
+            chroot rootdir useradd -m -s /bin/bash mipad || true
+            chroot rootdir bash -c "echo 'mipad:mipad' | chpasswd"
+            chroot rootdir usermod -aG sudo,audio,video,input mipad
 
             if [ "$FLAVOUR" = "gnome" ]; then
                 echo "🖥️ 安装 GNOME 桌面环境..."
@@ -145,7 +145,7 @@ EOF
                 cat > rootdir/etc/gdm3/daemon.conf <<EOF
 [daemon]
 AutomaticLoginEnable=true
-AutomaticLogin=luser
+AutomaticLogin=mipad
 EOF
 
             elif [ "$FLAVOUR" = "kde" ]; then
@@ -157,7 +157,7 @@ EOF
                 mkdir -p rootdir/etc/sddm.conf.d
                 cat > rootdir/etc/sddm.conf.d/autologin.conf <<EOF
 [Autologin]
-User=luser
+User=mipad
 Session=plasma
 EOF
             fi
